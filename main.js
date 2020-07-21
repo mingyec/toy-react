@@ -1,19 +1,55 @@
 import { ToyReact, BaseComponent } from "./ToyReact";
 
-class MyComponent extends BaseComponent {
+class Square extends BaseComponent {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: null
+        }
+    }
+
     render() {
-        return <div>
-            <span>cool</span>
+        return (
+            <button
+                className="square"
+                onClick={() => this.setState({ value: 'x' })}
+            >
+                {this.state.value || ''}
+            </button>
+        );
+    }
+}
+// this.props.onClick()
+
+class Board extends BaseComponent {
+    render() {
+        return (
             <div>
-                {this.children}
+                <div className="board-row">
+                    {this.renderSquare(0)}
+                    {this.renderSquare(1)}
+                    {this.renderSquare(2)}
+                </div>
+                <div className="board-row">
+                    {this.renderSquare(3)}
+                    {this.renderSquare(4)}
+                    {this.renderSquare(5)}
+                </div>
+                <div className="board-row">
+                    {this.renderSquare(6)}
+                    {this.renderSquare(7)}
+                    {this.renderSquare(8)}
+                </div>
             </div>
-        </div>
+        );
+    }
+
+    renderSquare(i) {
+        return <Square value={i} />;
     }
 }
 
-const ele = <MyComponent name="11" id="ida" >
-    <span>1111</span>
-</MyComponent>
+const ele = <Board />
 
 ToyReact.render(ele, document.body)
 
